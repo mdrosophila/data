@@ -52,8 +52,10 @@ run_analysis<-function(){
         mergefile3$activitycode<-NULL
         ## 4. Appropriately labels the data set with descriptive variable names. 
         ## Remove '-',"()"from column names, make names readable
+        ## Replace Cap letters with lower letters
         names(mergefile3)<-gsub("-","",names(mergefile3))
         names(mergefile3)<-gsub("\\()","",names(mergefile3))
+        names(mergefile3)<-tolower(names(mergefile3))
         
         ##Creates a second, independent tidy data set with the average of 
         ##each variable for each activity and each subject. 
