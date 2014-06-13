@@ -1,9 +1,17 @@
+## Downlod the zip file from web, named it to hw3.zip
+
+
+downloadfile<-function(){
+  if (!file.exists("./data")) dir.create("./data") 
+  myurl<-"https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip "
+  download.file(myurl,"./data/hw3.zip",mode="wb")
+  
+}
+
 run_analysis<-function(){
-        ## Downlod the zip file from web, named it to hw3.zip
-        myurl<-"https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip "
-        download.file(myurl,"./hw3.zip",mode="wb")
+        
         ## Unzip the downloaded file. The names files are stored in filenames
-        filenames<-unzip("hw3.zip")
+        filenames<-unzip("./data/hw3.zip")
         
         ## 1. Merges the training and the test sets to create one data set.
         
@@ -38,18 +46,24 @@ run_analysis<-function(){
         ## 3.Uses descriptive activity names to name the activities 
         ## in the data set.The activity names are extracted from 
         ## activity_labels.txt file.
-        ## 4. Appropriately labels the data set with descriptive variable names. 
         activity<-read.table(filenames[1])
         mergefile3<-merge(activity,mergefile2,by.x=1,by.y="activitycode")
         names(mergefile3)<-c("activitycode","activity",names(mergefile3)[3:length(mergefile3)])
         mergefile3$activitycode<-NULL
+        ## 4. Appropriately labels the data set with descriptive variable names. 
+        ## Remove '-',"()"from column names, make names readable
+        names(mergefile3)<-gsub("-","",names(mergefile3))
+        names(mergefile3)<-gsub("\\()","",names(mergefile3))
         
         ##Creates a second, independent tidy data set with the average of 
         ##each variable for each activity and each subject. 
         ##Melt data based on activity and subject
         ##caculate mean of other variables based on activity and subject
-        meltfile<-melt(file,id=c("activity","subject"))
+        library(reshape2)
+        meltfile<-melt(mergefile3,id=c("activity","subject"))
         file2<-dcast(meltfile,activity+subject~variable, mean)
         file2       
               
 }
+
+
