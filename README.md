@@ -1,6 +1,6 @@
-data
+How my R code work.
 ====
-You should also include a README.md in the repo with your scripts. This repo explains how all of the scripts work and how they are connected.  
+
 ## Downlod the zip file from web, named it to hw3.zip
 
     downloadfile<-function(){
