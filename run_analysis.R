@@ -1,5 +1,32 @@
 ## Downlod the zip file from web, named it to hw3.zip
 
+## Unzip the downloaded file. The names files are stored in filenames
+## Read in files from "test" folder
+## combine them toghether into "test" file with cbind function
+## Read in files from "train" folder
+## combine them toghether into "train" file with cbind fucntion
+## 1. Merges the training and the test sets to create one data set.
+## Merge "test" and "train" file into one "mergefile" file 
+## Using the rbind fucntion
+## The column names of "mergefile" are replaced with descriptive names,
+## test subject with "subject",
+## activity names (i.e.walking...) with "activity" or its code "activitycode"
+## Measurement names extracted from feature.txt file
+## 2. Extracts only the measurements on the mean and
+##standard deviation for each measurement. 
+## 3.Uses descriptive activity names to name the activities 
+## in the data set.The activity names are extracted from 
+## activity_labels.txt file.
+## 4. Appropriately labels the data set with descriptive variable names. 
+## Remove '-',"()"from column names, make names readable
+## The first character t are replaced with time
+## And the f with frequency
+## Replace Cap letters with lower letters
+##5.Creates a second, independent tidy data set with the average of 
+##each variable for each activity and each subject. 
+##Melt data based on activity and subject
+##caculate mean of other variables based on activity and subject
+
 
 downloadfile<-function(){
   if (!file.exists("./data")) dir.create("./data") 
@@ -10,7 +37,6 @@ downloadfile<-function(){
 
 run_analysis<-function(){
         
-        ## Unzip the downloaded file. The names files are stored in filenames
         filenames<-unzip("./data/hw3.zip")
         
         ## 1. Merges the training and the test sets to create one data set.
@@ -31,7 +57,7 @@ run_analysis<-function(){
         ## Using the rbind fucntion
         mergefile<-rbind(test,train)
         ## The column names of "mergefile" are replaced with descriptive names,
-        ## with test subject with "subject",
+        ## test subject with "subject",
         ## activity names (i.e.walking...) with "activity" or its code "activitycode"
         ## Measurement names extracted from feature.txt file
         feature<-read.table(filenames[2],colClasses="character")
@@ -52,12 +78,17 @@ run_analysis<-function(){
         mergefile3$activitycode<-NULL
         ## 4. Appropriately labels the data set with descriptive variable names. 
         ## Remove '-',"()"from column names, make names readable
+        ## The first character t are replaced with time
+        ## And the f with frequency
         ## Replace Cap letters with lower letters
         names(mergefile3)<-gsub("-","",names(mergefile3))
         names(mergefile3)<-gsub("\\()","",names(mergefile3))
+        names(mergefile3)<-gsub("^t","time",names(mergefile3))
+        names(mergefile3)<-gsub("^f","frequency",names(mergefile3))
+        
         names(mergefile3)<-tolower(names(mergefile3))
         
-        ##Creates a second, independent tidy data set with the average of 
+        ##5.Creates a second, independent tidy data set with the average of 
         ##each variable for each activity and each subject. 
         ##Melt data based on activity and subject
         ##caculate mean of other variables based on activity and subject
