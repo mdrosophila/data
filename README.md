@@ -11,9 +11,26 @@ downloadfile<-function(){
   
 }
 
+## Unzip the downloaded file. The names files are stored in filenames
+## 1. Merges the training and the test sets to create one data set.
+## 2. Extracts only the measurements on the mean and 
+##standard deviation for each measurement. 
+## 3.Uses descriptive activity names to name the activities 
+## in the data set.The activity names are extracted from 
+## activity_labels.txt file.
+## 4. Appropriately labels the data set with descriptive variable names. 
+## Remove '-',"()"from column names, make names readable
+## The first character t are replaced with time
+## And the f with frequency
+## Replace Cap letters with lower letters
+##5.Creates a second, independent tidy data set with the average of 
+##each variable for each activity and each subject. 
+##Melt data based on activity and subject
+##caculate mean of other variables based on activity and subject
+
+
 run_analysis<-function(){
         
-        ## Unzip the downloaded file. The names files are stored in filenames
         filenames<-unzip("./data/hw3.zip")
         
         ## 1. Merges the training and the test sets to create one data set.
@@ -65,7 +82,7 @@ run_analysis<-function(){
         
         names(mergefile3)<-tolower(names(mergefile3))
         
-        ##Creates a second, independent tidy data set with the average of 
+        ##5.Creates a second, independent tidy data set with the average of 
         ##each variable for each activity and each subject. 
         ##Melt data based on activity and subject
         ##caculate mean of other variables based on activity and subject
@@ -75,3 +92,6 @@ run_analysis<-function(){
         file2       
               
 }
+
+
+
