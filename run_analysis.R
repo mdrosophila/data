@@ -80,13 +80,11 @@ run_analysis<-function(){
         ## Remove '-',"()"from column names, make names readable
         ## The first character t are replaced with time
         ## And the f with frequency
-        ## Replace Cap letters with lower letters
         names(mergefile3)<-gsub("-","",names(mergefile3))
         names(mergefile3)<-gsub("\\()","",names(mergefile3))
         names(mergefile3)<-gsub("^t","time",names(mergefile3))
         names(mergefile3)<-gsub("^f","frequency",names(mergefile3))
         
-        names(mergefile3)<-tolower(names(mergefile3))
         
         ##5.Creates a second, independent tidy data set with the average of 
         ##each variable for each activity and each subject. 
@@ -95,6 +93,8 @@ run_analysis<-function(){
         library(reshape2)
         meltfile<-melt(mergefile3,id=c("activity","subject"))
         file2<-dcast(meltfile,activity+subject~variable, mean)
+        
+        write.table(file2,"./data/data.txt",row.names=FALSE)
         file2       
               
 }
