@@ -24,11 +24,11 @@ How my R code work.
         doc5<-read.table(filenames[27])
         doc6<-read.table(filenames[28])
         train<-cbind(doc4,doc6,doc5)
-** Merge "test" and "train" file into one "mergefile" file using the rbind fucntion** 
+**Merge "test" and "train" file into one "mergefile" file using the rbind fucntion** 
 
         mergefile<-rbind(test,train)
         
-** The column names of "mergefile" are replaced with descriptive names,**  
+**The column names of "mergefile" are replaced with descriptive names,**   
 -test subject with "subject",  
 -activity names (i.e.walking...) with "activity" or its code "activitycode"  
 -and measurement names are extracted from feature.txt file  
