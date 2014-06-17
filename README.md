@@ -29,9 +29,9 @@ How my R code work.
         mergefile<-rbind(test,train)
         
 **The column names of "mergefile" are replaced with descriptive names,**  
--test subject with "subject",  
--activity names (i.e.walking...) with "activity" or its code "activitycode"  
--and measurement names are extracted from feature.txt file  
+- test subject with "subject",  
+- activity names (i.e.walking...) with "activity" or its code "activitycode"  
+- and measurement names are extracted from feature.txt file  
 
         feature<-read.table(filenames[2],colClasses="character")
         feature<-feature[[2]]
