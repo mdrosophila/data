@@ -43,8 +43,7 @@
 * Remove '-',"()"from column names, make names readable using gsub()
 * The first character t are replaced with time using gsub()
 * The first character f with frequency using gsub()
-* Replace Cap letters with lower letters using tolower()
-			
+
 ###5.Creates a second, independent tidy data set with the average of each variable for each activity and each subject. * * * Melt data based on activity and subject
 * Caculate mean of other variables based on activity and subject
 * The melt and dcast functions require install reshape2 package
